@@ -26,9 +26,17 @@ export const CardPerguntas = styled.div`
             display: block;
             background: #ccc;
             margin: 0 5px;
+            cursor: pointer;
 
             &:hover {
+                background: #2f2f2f
+            }
+            
+            &.active {
                 background: #828282
+                &:hover {
+                    background: #2f2f2f
+                }
             }
         }
     }
@@ -47,12 +55,12 @@ export const CardPerguntas = styled.div`
     }
 
     .resp {
+        margin-top: 30px;
         textarea {
             width: 100%;
             min-height: 200px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-top: 30px;
             padding: 16px;
             color: #818181;
             font-size: 12px;
