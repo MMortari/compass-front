@@ -19,7 +19,7 @@ export const CardPerguntas = styled.div`
         display: flex;
         justify-content: center;
 
-        a {
+        button {
             border-radius: 50%;
             width: 8px;
             height: 8px;
@@ -27,13 +27,14 @@ export const CardPerguntas = styled.div`
             background: #ccc;
             margin: 0 5px;
             cursor: pointer;
+            border: none;
 
             &:hover {
                 background: #2f2f2f
             }
             
             &.active {
-                background: #828282
+                background: #828282;
                 &:hover {
                     background: #2f2f2f
                 }
@@ -55,15 +56,30 @@ export const CardPerguntas = styled.div`
     }
 
     .resp {
-        margin-top: 30px;
+        margin: 30px 0 15px;
+        color: #818181;
         textarea {
             width: 100%;
             min-height: 200px;
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 16px;
-            color: #818181;
             font-size: 12px;
+        }
+        .p-checkbox .p-checkbox-box {
+            &.p-highlight {
+                border-color: rgb(237,20,91);
+                background-color: rgb(237,20,91);
+                
+                &:not(.p-disabled):hover {
+                    border-color: rgb(237,20,91);
+                    background-color: rgb(237,20,91);
+                }
+            }
+            &:not(.p-disabled).p-focus {
+                box-shadow: 0 0 0 0.2em rgba(237,20,91, .5);
+                border-color: rgb(237,20,91);
+            }
         }
     }
 
