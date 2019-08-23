@@ -94,6 +94,12 @@ export const CardPerguntas = styled.div`
             color: white;
             font-size: 12px;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+
+            svg {
+                margin: 0 10px;
+            }
         }
     }
 `

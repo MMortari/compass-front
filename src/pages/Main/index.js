@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Checkbox } from 'primereact/checkbox';
-import { find } from 'lodash';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { FaArrowRight, FaArrowLeft, FaCheckCircle } from 'react-icons/fa';
 
 // Styles
 import { Container, CardPerguntas } from './styles';
@@ -72,6 +73,20 @@ export default class Main extends Component {
 
         this.setState({ question: { ...this.state.questions[index], index } });
     }
+    handlePrevQuestion = () => {
+        const { index } = this.state.question;
+
+        if(index > 0) this.handleChangeQuestion(index - 1);
+    }
+    handleNextQuestion = () => {
+        const { index } = this.state.question;
+        const qtdeQuestions = this.state.questions.length - 1;
+
+        if(index !== qtdeQuestions) this.handleChangeQuestion(index + 1);
+    }
+    handleFinishQuestion = () => {
+        console.log("Finalizar questionário")
+    }
 
     // Answers
     handleSelectAnswer = (answer, question) => {
@@ -113,21 +128,30 @@ export default class Main extends Component {
                                 question.answerType === 'choices' 
                                 ? (answerOpt.map((answer, index) => (
                                     <Fragment key={index}>
-                                        {JSON.stringify(answers[question.index].answer === answer.id)}
+                                        {/* {JSON.stringify(answers[question.index].answer === answer.id)} */}
                                         <Checkbox 
                                             inputId={`answer${index}`} 
                                             value={answer.id} 
                                             onChange={() => this.handleSelectAnswer(answer, question)} 
-                                            value={answers[question.index].answer === answer.id}></Checkbox>
+                                            checked={answers[question.index].answer === answer.id}></Checkbox>
                                         <label htmlFor={`answer${index}`} className="p-checkbox-label">{answer.label}</label><br />
                                     </Fragment>
                                 )))
-                                : (<textarea placeholder="Sua resposta aqui!" onChange={e => this.handleTextAnswer(e, question)}></textarea>)
+                                : (<InputTextarea placeholder="Sua resposta aqui!" onChange={e => this.handleTextAnswer(e, question)} value={answers[question.index] ? answers[question.index].answer : ''} autoResize={true} />)
                             }
                         </div>
                         <div className="btns">
-                            <button type="button">Pergunta anterior!</button>
-                            <button type="button">Próxima pergunta!</button>
+                            { question.index !== 0 ? (
+                                <button type="button" onClick={this.handlePrevQuestion}><FaArrowLeft size={15} />Pergunta anterior!</button>
+                            ) : (
+                                <span></span>
+                            )}
+                            { question.index < questions.length - 1 && (
+                                <button type="button" onClick={this.handleNextQuestion}>Próxima pergunta! <FaArrowRight size={15} /></button>
+                            ) }
+                            { question.index === questions.length - 1 && (
+                                <button type="button" onClick={this.handleFinishQuestion}>Encerrar Perguntas! <FaCheckCircle size={15} /></button>
+                            ) }
                         </div>
                     </CardPerguntas>
                 </Container>
