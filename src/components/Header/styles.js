@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  font-family: 'Roboto', sans-serif;
   background-color: white;
   width: 100%;
   height: 50px;
@@ -9,6 +10,11 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;  
+
+  h1 {
+    font-weight: 100;
+    letter-spacing: 2px;
+  }
 `;
 
 export const UserPart = styled.div`
