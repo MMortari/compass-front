@@ -29,3 +29,32 @@ export const UserPart = styled.div`
     
     }
 `;
+
+export const DropdownUser = styled.ul`
+
+    display: ${props => !props.show && `none`};
+    /* height: 150px; */
+    width: 180px;
+    position: absolute;
+    top: 40px;
+    right: 30px;
+
+    /* border: 1px solid black; */
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+
+    li {
+        list-style: none;
+        text-align: right;
+
+        a {
+            display: block;
+            padding: 6px 15px;
+
+            &:hover {
+                background: #ccc;
+            }
+        }
+    }
+`;

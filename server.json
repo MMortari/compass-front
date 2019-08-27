@@ -1,0 +1,47 @@
+{
+  "questions": [
+    {
+        "id": 1,
+        "title": "",
+        "question": "Você está com dificuldades em conciliar sua vida pessoal e carga de trabalho. Seu gestor propõe que você tire alguns dias de folga para se reestabelecer, entretanto, você perderá um projeto muito importante. Analisando a possibilidade, o melhor é tirar a folga necessária.",
+        "answerType": "choices",
+        "answer": ""
+    },
+    {
+        "id": 2,
+        "title": "",
+        "question": "Um colega de trabalho está precisando da sua ajuda em uma tarefa. Os seus próprios prazos também estão apertados. Você escolhe ajudar seu colega e levar trabalho para casa.",
+        "answerType": "choices",
+        "answer": ""
+    },
+    {
+        "id": 3,
+        "title": "",
+        "question": "Você tem uma ideia que promete mudar processos e ajudar a empresa de forma geral. O clima está tenso, houveram diversas demissões e todos estão apreensivos. Você esta receoso(a) que sua ideia vá causar má impressão aos gestores. Você prefere então guardar a ideia para um momento mais oportuno. ",
+        "answerType": "write",
+        "answer": ""
+    }
+  ],
+  "answerOpt": [
+      {
+          "id": 1,
+          "label": "Discordo totalmente"
+      },
+      {
+          "id": 2,
+          "label": "Discordo parcialmente"
+      },
+      {
+          "id": 3,
+          "label": "Não concordo, nem discordo"
+      },
+      {
+          "id": 4,
+          "label": "Concordo parcialmente"
+      },
+      {
+          "id": 5,
+          "label": "Concordo totalmente"
+      }
+  ]
+}
