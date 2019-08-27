@@ -7,11 +7,14 @@ import Main from './pages/Main';
 function Routes() {
   return (
     <BrowserRouter>
-        <Switch>
-            <Route exact path="/" component={Main} />
-            <Route exact path="/:question" component={Main} />
-            <Route path="/login" component={Login} />
-        </Switch>
+      <Switch>
+        {/* Login */}
+        <Route path="/login" component={Login} />
+
+        {/* Questions */}
+        <Route exact path="/" component={Main} />
+        <Route exact path="/:question" component={Main} />
+      </Switch>
     </BrowserRouter>
   );
 }
