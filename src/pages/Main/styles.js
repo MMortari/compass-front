@@ -66,19 +66,23 @@ export const CardPerguntas = styled.div`
             padding: 16px;
             font-size: 12px;
         }
-        .p-checkbox .p-checkbox-box {
-            &.p-highlight {
-                border-color: rgb(237,20,91);
-                background-color: rgb(237,20,91);
-                
-                &:not(.p-disabled):hover {
+        .resp-options {
+            margin: 4px 0;
+            
+            .p-checkbox .p-checkbox-box {
+                &.p-highlight {
                     border-color: rgb(237,20,91);
                     background-color: rgb(237,20,91);
+                    
+                    &:not(.p-disabled):hover {
+                        border-color: rgb(237,20,91);
+                        background-color: rgb(237,20,91);
+                    }
                 }
-            }
-            &:not(.p-disabled).p-focus {
-                box-shadow: 0 0 0 0.2em rgba(237,20,91, .5);
-                border-color: rgb(237,20,91);
+                &:not(.p-disabled).p-focus {
+                    box-shadow: 0 0 0 0.2em rgba(237,20,91, .5);
+                    border-color: rgb(237,20,91);
+                }
             }
         }
     }
