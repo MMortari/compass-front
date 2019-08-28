@@ -29,10 +29,14 @@ export const UserPart = styled.div`
     .image {
         width: 30px;
         height: 30px;
-        background: rgb(237, 20, 91);
+        background: rgb(237,20,91);
         border-radius: 50%;
         margin-right: 15px;
-    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
     }
 `;
 
@@ -42,7 +46,7 @@ export const DropdownUser = styled.ul`
     /* height: 150px; */
     width: 180px;
     position: absolute;
-    top: 40px;
+    top: 45px;
     right: 30px;
 
     /* border: 1px solid black; */
@@ -57,10 +61,17 @@ export const DropdownUser = styled.ul`
         a {
             display: block;
             padding: 6px 15px;
+            color: #828282;
 
             &:hover {
-                background: #ccc;
+                background: #e8e8e8;
+                color: black;
             }
         }
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #d8d8d8;
     }
 `;

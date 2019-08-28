@@ -6,7 +6,11 @@ import { Container, UserPart, DropdownUser } from './styles';
 export default class Header extends Component {
 
     state = {
-        dropdownUser: false
+        dropdownUser: true
+    }
+
+    handleToggleDropdownUser = () => {
+        this.setState({ dropdownUser: this.state.dropdownUser });
     }
 
     render() {
@@ -15,16 +19,20 @@ export default class Header extends Component {
                 <div className="">
                     <h1>Compass</h1>
                 </div>
-                <UserPart onClick={() => this.setState({ dropdownUser: !this.state.dropdownUser })}>
+                <UserPart onClick={this.handleToggleDropdownUser}>
                     <span className="name">Matheus Mortari</span>
-                    <div className="image"></div>
+                    <div className="image">M</div>
                 </UserPart>
-                <DropdownUser show={this.state.dropdownUser}>
+                <DropdownUser show={this.state.dropdownUser} onMouseOut={this.handleToggleDropdownUser}>
                     <li>
-                        <Link to="/">Hello</Link>
+                        <Link to="/">Meus Processos</Link>
                     </li>
                     <li>
-                        <Link to="/">Hello</Link>
+                        <Link to="/">Meu Perfil</Link>
+                    </li>
+                    <hr />
+                    <li>
+                        <Link to="/">Sair</Link>
                     </li>
                 </DropdownUser>
             </Container>
