@@ -6,11 +6,11 @@ import { FaArrowRight, FaArrowLeft, FaCheckCircle } from 'react-icons/fa';
 // Styles
 import { Container, CardPerguntas } from './styles';
 // Components
-import Header from './../../components/Header';
+import Header from '../../components/Header';
 // Services
-import api from './../../services/api';
+import api from '../../services/api';
 
-export default class Main extends Component {
+export default class Questions extends Component {
 
     state = {
         question: {}, // store the question the user is
