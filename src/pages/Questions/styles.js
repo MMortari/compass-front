@@ -6,6 +6,11 @@ export const Container = styled.div`
     align-items: center;
     height: calc(100vh - 50px);
     width: 100%;
+
+    .col {
+        padding-right: 2px !important;
+        padding-left: 2px !important;
+    }
 `
 export const CardPerguntas = styled.div`
     width: 700px;
@@ -13,7 +18,8 @@ export const CardPerguntas = styled.div`
     max-height: 75vh;
     background-color: white;
     border-radius: 8px;
-    padding: 22px 50px 40px;
+    padding: 22px 50px 75px;
+    position: absolute;
 
     .pags {
         display: flex;
@@ -28,6 +34,7 @@ export const CardPerguntas = styled.div`
             margin: 0 5px;
             cursor: pointer;
             border: none;
+            outline: none;
 
             &:hover {
                 background: #2f2f2f
@@ -45,12 +52,13 @@ export const CardPerguntas = styled.div`
     .info {
         h1 {
             margin-top: 50px;
-            font-size: 22px;   
-            margin-bottom: 20px;     
-        }
-        span {
             font-size: 12px;
             color: #828282;
+            font-weight: bold;
+        }
+        span {
+            font-size: 20px;   
+            margin-bottom: 20px;     
             text-align: justify
         }
     }
@@ -58,6 +66,10 @@ export const CardPerguntas = styled.div`
     .resp {
         margin: 30px 0 15px;
         color: #818181;
+
+        label.p-checkbox-label {
+            cursor: pointer;
+        }
         textarea {
             width: 100%;
             min-height: 200px;
@@ -90,6 +102,11 @@ export const CardPerguntas = styled.div`
     .btns {
         display: flex;
         justify-content: space-between;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        padding: 0 25px;
 
         button {
             background-color: rgb(237,20,91);
@@ -100,10 +117,40 @@ export const CardPerguntas = styled.div`
             border-radius: 8px;
             display: flex;
             align-items: center;
+            outline: none;
 
             svg {
                 margin: 0 10px;
             }
         }
+    }
+`
+export const CardRespostas = styled.div`
+    width: 700px;
+    min-height: 500px;
+    max-height: 75vh;
+    background-color: white;
+    border-radius: 8px;
+    padding: 22px 50px 75px;
+    position: absolute;
+    overflow: auto;
+    ::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+    }
+    ::-webkit-scrollbar {
+        width: 6px;
+        background: #F4F4F4;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #b2b2b2;
+        border-radius: 4px;
+        margin: 0 2px
+    }
+
+    h1 {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 100;
+        letter-spacing: 1px;
     }
 `

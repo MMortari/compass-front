@@ -6,11 +6,11 @@ import { Container, UserPart, DropdownUser } from './styles';
 export default class Header extends Component {
 
     state = {
-        dropdownUser: true
+        dropdownUser: false
     }
 
     handleToggleDropdownUser = () => {
-        this.setState({ dropdownUser: this.state.dropdownUser });
+        this.setState({ dropdownUser: !this.state.dropdownUser });
     }
 
     render() {
@@ -28,7 +28,7 @@ export default class Header extends Component {
                         <Link to="/">Meus Processos</Link>
                     </li>
                     <li>
-                        <Link to="/">Meu Perfil</Link>
+                        <Link to="/profile">Meu Perfil</Link>
                     </li>
                     <hr />
                     <li>
