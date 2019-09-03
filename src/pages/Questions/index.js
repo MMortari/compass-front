@@ -118,10 +118,14 @@ export default class Questions extends Component {
         if(index !== qtdeQuestions) this.handleChangeQuestion(index + 1);
     }
     handleGoToQuestion = nthQuestion => {
-        const qtdeQuestions = this.state.questions.length - 1;
-        this.props.history.push(`${pageUrl}/${nthQuestion + 2}`);
+        const qtdeQuestions = this.state.questions.length;
+        this.props.history.push(`${pageUrl}/${nthQuestion}`);
 
         if(nthQuestion !== qtdeQuestions) this.handleChangeQuestion(nthQuestion - 1);
+
+        // console.log("Teste -> ", this.state.question)
+
+        this.setState({ isAnswer: false })
     }
     handleFinishQuestion = () => {
         this.props.history.push(`${pageUrl}/answers`);
@@ -155,8 +159,9 @@ export default class Questions extends Component {
             <Fragment>
                 <Container>
                     { 
-                        !isAnswer ? (
+                        !isAnswer? (
                             <CardPerguntas>
+                            {/* {JSON.stringify((!isAnswer && questions))} */}
                                 <div className="pags">
                                     {questions.map((_ask, index) => (
                                         <button className={question.index === index ? 'active': ''} onClick={() => this.handleChangeQuestion(index)} key={index}></button>
@@ -201,20 +206,25 @@ export default class Questions extends Component {
                                 <h1>Minhas respostas</h1>
 
                                 <ul>
-                                    {questions && questions.map((data, index) => (
-                                        <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)}>
-                                            <h2>Pergunta { index + 1 }</h2>
-                                            <p>{data.question}</p>
-                                            <span>
-                                                { 
-                                                    data.tanswerType === "choices" 
-                                                    ? find(answerOpt, ['id', find(answers, ['idQuestion', data.id]).answer]).label 
-                                                    : find(answers, ['idQuestion', data.id]).answer 
-                                                }
-                                            </span>
-                                        </li>
-                                    ))}
+                                    {questions && questions.map((data, index) => {
+                                        const testAnswer = find(answers, ['idQuestion', data.id]).answer;
+                                        return (
+                                            <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)}  data-toggle="tooltip" data-placement="top" title="Tooltip na parte superior">
+                                                <h2>Pergunta { index + 1 }</h2>
+                                                <p>{data.question}</p>
+                                                <span>
+                                                    { 
+                                                        data.answerType === "choices" 
+                                                        ? find(answerOpt, ['id', testAnswer]).label 
+                                                        : testAnswer
+                                                    }
+                                                </span>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
+
+                                <button className="btn">Concluir</button>
                             </CardRespostas>
                         )
                     }

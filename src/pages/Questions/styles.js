@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+const mainColor = 'rgb(237,20,91)';
+const mainColorDarker = 'rgb(200, 14, 75)';
+
 export const Container = styled.div`
     display: flex;
     justify-content: center;
@@ -161,7 +164,7 @@ export const CardRespostas = styled.div`
             border-bottom: 1px solid #ccc;
             margin-bottom: 15px;
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 30px;
             border-radius: 4px;
             cursor: pointer;
             transition: .3s;
@@ -176,11 +179,26 @@ export const CardRespostas = styled.div`
             }
             p {
                 margin: 0;
+                margin-top: 30px;
             }
             span {
                 margin: 20px 0;
                 display: block;
+                font-weight: bold;
             }
+        }
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 30px;
+        background-color: ${mainColor};
+        color: white;
+        transition: .3s;    
+
+        &:hover {
+            color: white;
+            background: ${mainColorDarker};
         }
     }
 `
