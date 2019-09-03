@@ -153,4 +153,34 @@ export const CardRespostas = styled.div`
         font-weight: 100;
         letter-spacing: 1px;
     }
+
+    ul {
+        list-style: none;
+
+        li {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: .3s;
+            margin: 40px 0;
+
+            &:hover {
+                border-color: rgb(237,20,91);
+            }
+
+            h1 {
+
+            }
+            p {
+                margin: 0;
+            }
+            span {
+                margin: 20px 0;
+                display: block;
+            }
+        }
+    }
 `

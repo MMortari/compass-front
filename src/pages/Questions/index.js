@@ -117,6 +117,12 @@ export default class Questions extends Component {
 
         if(index !== qtdeQuestions) this.handleChangeQuestion(index + 1);
     }
+    handleGoToQuestion = nthQuestion => {
+        const qtdeQuestions = this.state.questions.length - 1;
+        this.props.history.push(`${pageUrl}/${nthQuestion + 2}`);
+
+        if(nthQuestion !== qtdeQuestions) this.handleChangeQuestion(nthQuestion - 1);
+    }
     handleFinishQuestion = () => {
         this.props.history.push(`${pageUrl}/answers`);
         this.setState({ isAnswer: true });
@@ -196,14 +202,9 @@ export default class Questions extends Component {
 
                                 <ul>
                                     {questions && questions.map((data, index) => (
-                                        <li key={data.id}>
+                                        <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)}>
                                             <h2>Pergunta { index + 1 }</h2>
-                                            <span>{data.question}</span><br/>
-                                            <span>{data.question}</span><br/>
-                                            <span>{data.question}</span><br/>
-                                            <span>{data.question}</span><br/>
-                                            <span>{data.question}</span><br/>
-                                            <span>{data.question}</span><br/>
+                                            <p>{data.question}</p>
                                             <span>
                                                 { 
                                                     data.tanswerType === "choices" 
