@@ -1,15 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { InputTextarea } from 'primereact/inputtextarea';
+// import { Tooltip } from 'primereact/tooltip';
 import { FaArrowRight, FaArrowLeft, FaCheckCircle } from 'react-icons/fa'; 
 import { find } from 'lodash';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 // Styles
 import { Container, CardPerguntas, CardRespostas } from './styles';
 // Components
-
+import Loading from './../../components/Loading';
 // Services
 import api from '../../services/api';
+
+const MySwal = withReactContent(Swal)
 
 const pageUrl = '/questions';
 
@@ -77,7 +82,7 @@ export default class Questions extends Component {
         let startQuestion = 0;
         let isAnswer = false;
 
-        console.log("is number -> ", question, !isNaN(parseInt(question)), typeof question, typeof parseInt(question))
+        // console.log("is number -> ", question, !isNaN(parseInt(question)), typeof question, typeof parseInt(question))
         if(!isNaN(parseInt(question))) {
             if(question >= 1 && question <= questionsResponse.length) {
                 startQuestion = question - 1;
@@ -98,7 +103,9 @@ export default class Questions extends Component {
 
     // Form
     handleChangeQuestion = index => {
-        console.log(`Change to index -> ${index}`);
+        // console.log(`Change to index -> ${index}`);
+
+        this.verifyHasAllAnswers();
 
         this.setState({ question: { ...this.state.questions[index], index } });
     }
@@ -128,8 +135,16 @@ export default class Questions extends Component {
         this.setState({ isAnswer: false })
     }
     handleFinishQuestion = () => {
-        this.props.history.push(`${pageUrl}/answers`);
-        this.setState({ isAnswer: true });
+        if(this.verifyHasAllAnswers()) {
+            this.props.history.push(`${pageUrl}/answers`);
+            this.setState({ isAnswer: true });
+        } else {
+            // console.log("Você precisa responder todas as questões");
+            MySwal.fire({
+                title: "Você precisa responder todas as questões",
+                type: 'warning'
+            })
+        }
     }
 
     // Answers
@@ -149,18 +164,30 @@ export default class Questions extends Component {
 
         this.setState({ answers });
     }
+    verifyHasAllAnswers = () => {
+        let verifica = true;
+
+        this.state.answers.map(data => {
+            if(data.answer === null || data.answer === "") verifica = verifica && false;
+        });
+
+        // console.log("verifyHasAllAnswers -> ", verifica);
+
+        return verifica;
+    }
 
     render() {
-        const { questions, question, answers, answerOpt, isAnswer } = this.state;
+        const { questions, question, answers, answerOpt, isAnswer, loading } = this.state;
 
-        console.log(this.state);
+        // console.log(this.state);
 
         return (
             <Fragment>
                 <Container>
                     { 
-                        !isAnswer? (
+                        !isAnswer ? (
                             <CardPerguntas>
+                            { loading && (<Loading />) }
                             {/* {JSON.stringify((!isAnswer && questions))} */}
                                 <div className="pags">
                                     {questions.map((_ask, index) => (
@@ -184,7 +211,7 @@ export default class Questions extends Component {
                                                 <label htmlFor={`answer${index}`} className="p-checkbox-label">{answer.label}</label><br />
                                             </div>
                                         )))
-                                        : (<InputTextarea placeholder="Sua resposta aqui!" onChange={e => this.handleTextAnswer(e, question)} value={answers[question.index] ? answers[question.index].answer : ''} autoResize={true} />)
+                                        : (<InputTextarea placeholder="Sua resposta aqui!" onChange={e => this.handleTextAnswer(e, question)} value={answers[question.index] != null ? answers[question.index].answer : ''} autoResize={true} />)
                                     }
                                 </div>
                                 <div className="btns d-flex align-items-end">
@@ -209,13 +236,13 @@ export default class Questions extends Component {
                                     {questions && questions.map((data, index) => {
                                         const testAnswer = find(answers, ['idQuestion', data.id]).answer;
                                         return (
-                                            <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)}  data-toggle="tooltip" data-placement="top" title="Tooltip na parte superior">
+                                            <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)} tooltip="Clique para editar a resposta!" tooltipOptions={{position: 'top'}}>
                                                 <h2>Pergunta { index + 1 }</h2>
                                                 <p>{data.question}</p>
                                                 <span>
                                                     { 
                                                         data.answerType === "choices" 
-                                                        ? find(answerOpt, ['id', testAnswer]).label 
+                                                        ? testAnswer != null ? find(answerOpt, ['id', testAnswer]).label : ''
                                                         : testAnswer
                                                     }
                                                 </span>
