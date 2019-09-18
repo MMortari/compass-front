@@ -7,6 +7,7 @@ import Header from './components/Header/index';
 import Login from './pages/Login';
 import Questions from './pages/Questions';
 import Profile from './pages/Profile';
+import Thank from './pages/Thank';
 
 function Routes() {
   return (
@@ -25,6 +26,9 @@ function Routes() {
 
           {/* Profile */}
           <Route exact path="/profile" component={Profile} />
+
+          {/* Thank */}
+          <Route exact path="/thank" component={Thank} />
         </Route>
       </Switch>
     </BrowserRouter>

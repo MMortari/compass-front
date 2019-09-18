@@ -141,7 +141,7 @@ export default class Questions extends Component {
         } else {
             // console.log("Você precisa responder todas as questões");
             MySwal.fire({
-                title: "Você precisa responder todas as questões",
+                text: "Você precisa responder todas as questões",
                 type: 'warning'
             })
         }
@@ -174,6 +174,18 @@ export default class Questions extends Component {
         // console.log("verifyHasAllAnswers -> ", verifica);
 
         return verifica;
+    }
+
+    handleFinishQuiz = () => {
+        MySwal.fire({
+            text: "Você tem certeza de suas respostas?",
+            type: 'question'
+        }).then(data => {
+            if(data.value === true) {
+                console.log("Finish quiz -> ", data);
+                this.props.history.push(`/thank`);
+            }
+        })
     }
 
     render() {
@@ -251,7 +263,7 @@ export default class Questions extends Component {
                                     })}
                                 </ul>
 
-                                <button className="btn">Concluir</button>
+                                <button className="btn" onClick={this.handleFinishQuiz}>Concluir</button>
                             </CardRespostas>
                         )
                     }
