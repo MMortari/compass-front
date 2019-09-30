@@ -169,6 +169,7 @@ export default class Questions extends Component {
 
         this.state.answers.map(data => {
             if(data.answer === null || data.answer === "") verifica = verifica && false;
+            return true;
         });
 
         // console.log("verifyHasAllAnswers -> ", verifica);
@@ -248,7 +249,7 @@ export default class Questions extends Component {
                                     {questions && questions.map((data, index) => {
                                         const testAnswer = find(answers, ['idQuestion', data.id]).answer;
                                         return (
-                                            <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)} tooltip="Clique para editar a resposta!" tooltipOptions={{position: 'top'}}>
+                                            <li key={data.id} onClick={() => this.handleGoToQuestion(data.id)} tooltip="Clique para editar a resposta!">
                                                 <h2>Pergunta { index + 1 }</h2>
                                                 <p>{data.question}</p>
                                                 <span>

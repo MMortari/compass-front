@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 // Components
-import Header from './components/Header/index';
+import Header from './components/Header';
+import Route from './components/Route'
 // Pages
 import Principal from './pages/Principal';
 import Login from './pages/Login';
@@ -18,20 +19,21 @@ function Routes() {
         <Route path="/login" component={Login} />
 
 
-        <Route path="/">
+        <Route path="/" isPrivate>
           <Header />
           {/* Principal */}
-          <Route exact path="/" component={Principal} />
+          <Route exact path="/" component={Principal} isPrivate />
 
           {/* Questions */}
-          <Route exact path="/questions" component={Questions} />
-          <Route exact path="/questions/:question" component={Questions} />
+          <Route exact path="/questions" component={Questions} isPrivate />
+          <Route exact path="/questions/:question" component={Questions} isPrivate />
 
           {/* Profile */}
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile" component={Profile} isPrivate />
 
           {/* Thank */}
-          <Route exact path="/thank" component={Thank} />
+          <Route exact path="/thank" component={Thank} isPrivate />
+          <Route exact path="/profile" component={Profile} isPrivate />
         </Route>
       </Switch>
     </BrowserRouter>
