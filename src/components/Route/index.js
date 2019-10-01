@@ -1,22 +1,36 @@
 import React from 'react';
-import { Route as ReactRouter, Redirect } from 'react-router-dom';
+import { Route as RouteRouter, Redirect } from 'react-router-dom';
 
 export default function Route({
   component: Component,
   isPrivate = false,
   ...rest
 }) {
-  const signed = true;
+  let logged;
 
-  if(!signed && isPrivate) {
-    return <Redirect to="/login" />
-  } 
+  const local = localStorage.getItem('compassUser');
+  const user = JSON.parse(local);
+
+  // console.log("User -> ", user, local);
+
+  if(user && user.auth) {
+    logged = true;
+  } else {
+    logged = false;
+  }
+
+  console.log("Authentication -> ", !!user)
+
+  if(!logged && isPrivate) {
+    // Será redirecionado para o login
+    return <Redirect to="/login" />;
+  }
   
-  if(signed && !isPrivate) {
-    return <Redirect to="/" />
-  } 
+  if(logged && !isPrivate) {
+    // Será redirecionado para o main
+    return <Redirect to="/" />;
+  }
 
-  return (
-    <ReactRouter {...rest} component={Component} />
-  )
+  return <RouteRouter {...rest} component={Component} />
+
 }

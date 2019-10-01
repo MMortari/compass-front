@@ -1,9 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { 
+  BrowserRouter, 
+  Switch, 
+  // Route 
+} from 'react-router-dom';
 
 // Components
-import Header from './components/Header';
-import Route from './components/Route'
+import Header from './components/Header/index';
+import Route from './components/Route';
 // Pages
 import Principal from './pages/Principal';
 import Login from './pages/Login';
@@ -33,7 +37,6 @@ function Routes() {
 
           {/* Thank */}
           <Route exact path="/thank" component={Thank} isPrivate />
-          <Route exact path="/profile" component={Profile} isPrivate />
         </Route>
       </Switch>
     </BrowserRouter>

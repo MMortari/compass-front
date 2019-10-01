@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Container, Card } from './../default';
-import { Title, ListVagas, LittleCard } from './styles';
+import { Title, LittleCard } from './styles';
 
 export default class Principal extends Component {
 
@@ -15,7 +15,7 @@ export default class Principal extends Component {
         <Card>
           <Title>Vagas</Title>
 
-          <div class="row">
+          <div className="row">
             <div className="col-md-6">
               <LittleCard onClick={() => this.handleRedirect('/questions/1')}>
                 <p>Analista de TI</p>
