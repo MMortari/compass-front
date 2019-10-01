@@ -11,7 +11,7 @@ export default function Route({
   const local = localStorage.getItem('compassUser');
   const user = JSON.parse(local);
 
-  console.log("User -> ", user, local);
+  // console.log("User -> ", user, local);
 
   if(user && user.auth) {
     logged = true;

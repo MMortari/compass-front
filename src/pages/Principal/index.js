@@ -15,7 +15,7 @@ export default class Principal extends Component {
         <Card>
           <Title>Vagas</Title>
 
-          <div class="row">
+          <div className="row">
             <div className="col-md-6">
               <LittleCard onClick={() => this.handleRedirect('/questions/1')}>
                 <p>Analista de TI</p>

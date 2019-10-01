@@ -73,8 +73,8 @@ export default class Questions extends Component {
     }
 
     async componentDidMount() {
-        const { data: questionsResponse } = await api.get('/questions');
-        const { data: answersOptResponse } = await api.get('/answerOpt');
+        const { data: questionsResponse } = await api.get('/question');
+        const { data: answersOptResponse } = await api.get('/answerOption');
 
         const answers = await questionsResponse.map(question => ({ idQuestion: question.id, answer: null }));
         
@@ -208,7 +208,8 @@ export default class Questions extends Component {
                                     ))}
                                 </div>
                                 <div className="info">
-                                    <h1>Pergunta { question.index + 1 }</h1>
+                                    {/* <h1>Pergunta { question.index + 1 }</h1> */}
+                                    <h1>{question.title}</h1>
                                     <span>{question.question}</span>
                                 </div>
                                 <div className="resp row">

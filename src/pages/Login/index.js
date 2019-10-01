@@ -25,7 +25,6 @@ export default class Login extends Component {
     }
 
     handleSubmitForm = async e => {
-        console.log("Clicado");
 
         this.setState({ loading: true, message: 'Autenticando' });
         
@@ -35,13 +34,14 @@ export default class Login extends Component {
                 password: this.state.pass
             });
 
-            sessionStorage.setItem('compassUser', JSON.stringify(response.data));
-
-            this.setState({ loading: false, message: "Autenticado com sucesso!" });
-
-            this.props.history.push(`/`);
+            if(response.data.auth) {
+                localStorage.setItem('compassUser', JSON.stringify(response.data));
+    
+                this.setState({ loading: false, message: "Autenticado com sucesso!" });
+    
+                this.props.history.push(`/`);
+            }
         } catch(err) {
-            console.log("Erro -> ", err.error);
             this.setState({ loading: false, message: "Erro ao autenticar!" });
         }
     }

@@ -53,6 +53,7 @@ export const DropdownUser = styled.ul`
     border-radius: 4px;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    z-index: 1;
 
     li {
         list-style: none;
