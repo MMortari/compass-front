@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Container, Card } from './../default';
-import { Title, ListVagas, LittleCard } from './styles';
+import { Title, LittleCard } from './styles';
 
 export default class Principal extends Component {
 

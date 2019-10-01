@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-const mainColor = 'rgb(237,20,91)';
-const mainColorDarker = 'rgb(200, 14, 75)';
-
 export const Container = styled.div`
     display: flex;
     justify-content: center;

@@ -169,6 +169,7 @@ export default class Questions extends Component {
 
         this.state.answers.map(data => {
             if(data.answer === null || data.answer === "") verifica = verifica && false;
+            return true;
         });
 
         // console.log("verifyHasAllAnswers -> ", verifica);
