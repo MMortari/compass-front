@@ -93,7 +93,7 @@ export default class Profile extends Component {
 
     if(text.length === 8) {
       this.setState({ loading: true });
-      const response = await axios.get(`http://viacep.com.br/ws/${text}/json/`);
+      const response = await axios.get(`https://viacep.com.br/ws/${text}/json/`);
 
       if(response.status === 200) {
         this.setState({ loading: false, userEdited: { ...this.state.userEdited, CIDADE: response.data.localidade, BAIRRO: response.data.bairro } })
