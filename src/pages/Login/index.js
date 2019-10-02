@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 
 // Components
 import Loading from './../../components/Loading';
@@ -36,8 +37,9 @@ export default class Login extends Component {
 
             if(response.data.auth) {
                 localStorage.setItem('compassUser', JSON.stringify(response.data));
-    
-                this.setState({ loading: false, message: "Autenticado com sucesso!" });
+                
+                toast.success("Logado com sucesso!");
+                this.setState({ loading: false });
     
                 this.props.history.push(`/`);
             }

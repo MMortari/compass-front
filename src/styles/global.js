@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
@@ -24,5 +26,9 @@ export default createGlobalStyle`
   } 
   button {
     cursor: pointer;
+  }
+
+  .Toastify__toast {
+    border-radius: 5px !important;
   }
 `;

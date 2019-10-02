@@ -178,15 +178,26 @@ export default class Questions extends Component {
     }
 
     handleFinishQuiz = () => {
-        MySwal.fire({
-            text: "Você tem certeza de suas respostas?",
-            type: 'question'
-        }).then(data => {
-            if(data.value === true) {
-                console.log("Finish quiz -> ", data);
-                this.props.history.push(`/thank`);
-            }
-        })
+        if(this.verifyHasAllAnswers()) {
+            MySwal.fire({
+                text: "Você tem certeza de suas respostas?",
+                type: 'question'
+            }).then(data => {
+                if(data.value === true) {
+                    console.log("Finish quiz -> ", data);
+                }
+            })
+        } else {
+            MySwal.fire({
+                text: "Você precisa responder todas questões!",
+                type: 'warning'
+            }).then(data => {
+                if(data.value === true) {
+                    console.log("Finish quiz -> ", data);
+                    this.props.history.push(`/thank`);
+                }
+            })
+        }
     }
 
     render() {
