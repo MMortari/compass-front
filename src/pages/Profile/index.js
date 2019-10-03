@@ -60,9 +60,9 @@ export default class Profile extends Component {
   handleSaveUpdates = async () => {
     const { user, userEdited } = this.state;
 
-    console.log(`Atualizar`);
-    console.log(`User -> `, user);
-    console.log("usedEdited -> ", userEdited)
+    // console.log(`Atualizar`);
+    // console.log(`User -> `, user);
+    // console.log("usedEdited -> ", userEdited)
 
     const userEditedA = Object.keys(userEdited);
 
@@ -133,7 +133,7 @@ export default class Profile extends Component {
             <Col xs={3}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Gênero</Form.Label>
-                <Form.Control as="select" defaultValue={this.state.userEdited.SEXO} onChange={e => this.setState({ userEdited: { ...this.state.userEdited, SEXO: e.target.value } })}>
+                <Form.Control as="select" value={this.state.userEdited.SEXO} onChange={e => this.setState({ userEdited: { ...this.state.userEdited, SEXO: e.target.value } })}>
                   <option value="M">Masculino</option>
                   <option value="F">Feminino</option>
                   <option value="N">Não Binário</option>
@@ -143,7 +143,7 @@ export default class Profile extends Component {
             <Col xs={3}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>PNE</Form.Label>
-                <Form.Control as="select" defaultValue={this.state.userEdited.PNE} onChange={e => this.setState({ userEdited: { ...this.state.userEdited, PNE: e.target.value } })}>
+                <Form.Control as="select" value={this.state.userEdited.PNE} onChange={e => this.setState({ userEdited: { ...this.state.userEdited, PNE: e.target.value } })}>
                   <option value="1">Sim</option>
                   <option value="0">Não</option>
                 </Form.Control>

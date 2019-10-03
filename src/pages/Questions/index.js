@@ -178,7 +178,7 @@ export default class Questions extends Component {
                     if(retorno.status) {
                         this.setState({ loading: false });
                         this.props.history.push('/thank');
-                        toast.success("Logado com sucesso!");
+                        toast.success("Respostas enviadas com sucesso!");
                     }
 
                 }

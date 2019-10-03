@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Questions from './pages/Questions';
 import Profile from './pages/Profile';
 import Thank from './pages/Thank';
+import SelectiveProcess from './pages/SelectiveProcess';
 
 function Routes() {
   return (
@@ -27,6 +28,9 @@ function Routes() {
           <Header />
           {/* Principal */}
           <Route exact path="/" component={Principal} isPrivate />
+
+          {/* SelectiveProcess */}
+          <Route exact path="/selectiveProcess/:id" component={SelectiveProcess} isPrivate />
 
           {/* Questions */}
           <Route exact path="/questions" component={Questions} isPrivate />

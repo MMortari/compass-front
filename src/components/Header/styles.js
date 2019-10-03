@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   font-family: 'Roboto', sans-serif;
@@ -16,6 +17,19 @@ export const Container = styled.div`
     letter-spacing: 2px;
   }
 `;
+
+export const Logo = styled(Link).attrs({
+    to: '/'
+})`
+    font-size: 30px;
+    font-weight: 100;
+    color: black;
+
+    &:hover {
+        text-decoration: none;
+        color: black;
+    }
+`
 
 export const UserPart = styled.div`
     display: flex;

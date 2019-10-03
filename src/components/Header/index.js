@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { Container, UserPart, DropdownUser } from './styles';
+import { Container, Logo, UserPart, DropdownUser } from './styles';
 
 export default class Header extends Component {
 
@@ -29,7 +29,7 @@ export default class Header extends Component {
         return (
             <Container>
                 <div className="">
-                    <h1>Compass</h1>
+                    <Logo>Compass</Logo>
                 </div>
                 <UserPart onClick={this.handleToggleDropdownUser}>
                     <span className="name">Welcome, { this.state.name }</span>

@@ -31,12 +31,12 @@ export default class Principal extends Component {
         { this.state.loading && (<Loading />) }
 
         <Card>
-          <Title>Vagas</Title>
+          <Title>Processos Seletivos</Title>
 
           <div className="row">
             { this.state.processos && this.state.processos.map(processo => (
             <div className="col-md-6" key={processo.COD_PRCSS_SELETIVO}>
-              <LittleCard onClick={() => this.handleRedirect('/questions/1')}>
+              <LittleCard onClick={() => this.handleRedirect(`/selectiveProcess/${processo.COD_PRCSS_SELETIVO}`)}>
                 <p>Analista de TI</p>
 
                 <small>Clique para inicar as perguntas</small>

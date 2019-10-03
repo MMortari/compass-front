@@ -45,7 +45,8 @@ export default class Login extends Component {
                 this.props.history.push(`/`);
             }
         } catch(err) {
-            this.setState({ loading: false, message: "Erro ao autenticar!", buttonName: 'Entrar' });
+            toast.error("Erro ao autenticar!");
+            this.setState({ loading: false, buttonName: 'Entrar' });
         }
     }
 
