@@ -60,6 +60,10 @@ export default class Profile extends Component {
   handleSaveUpdates = async () => {
     const { user, userEdited } = this.state;
 
+    console.log(`Atualizar`);
+    console.log(`User -> `, user);
+    console.log("usedEdited -> ", userEdited)
+
     const userEditedA = Object.keys(userEdited);
 
     const alterado = [];
@@ -72,7 +76,7 @@ export default class Profile extends Component {
     if(alterado.length > 0) {
       this.setState({ loading: true });
 
-      const response = await api.put(`/candidate/${this.state.id}`, this.state.userEdited);
+      const response = await api.put(`/candidate/${this.state.id}`, userEdited);
   
       if(response.status) {
         this.setState({ user: userEdited, loading: false });
@@ -148,7 +152,7 @@ export default class Profile extends Component {
             <Col xs={6}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>CEP</Form.Label>
-                <Form.Control type="text" placeholder="Coloque seu CEP" maxLength="8" defaultValue={this.state.userEdited.CEP} onChange={e => {this.setState({ userEdited: { ...this.state.userEdited, CEP: e.target.value } }); this.handleCEP(e)}} />
+                <Form.Control type="number" placeholder="Coloque seu CEP" maxLength="8" defaultValue={this.state.userEdited.CEP} onChange={e => {this.setState({ userEdited: { ...this.state.userEdited, CEP: e.target.value } }); this.handleCEP(e)}} />
               </Form.Group>
             </Col>
             <Col xs={6}>

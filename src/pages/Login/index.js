@@ -14,6 +14,7 @@ export default class Login extends Component {
         user: '',
         pass: '',
         loading: false,
+        buttonName: 'Entrar',
         message: ''
     }
 
@@ -27,7 +28,7 @@ export default class Login extends Component {
 
     handleSubmitForm = async e => {
 
-        this.setState({ loading: true, message: 'Autenticando' });
+        this.setState({ loading: true, buttonName: 'Autenticando...' });
         
         try {
             const response = await api.post('/authentication', {
@@ -44,7 +45,7 @@ export default class Login extends Component {
                 this.props.history.push(`/`);
             }
         } catch(err) {
-            this.setState({ loading: false, message: "Erro ao autenticar!" });
+            this.setState({ loading: false, message: "Erro ao autenticar!", buttonName: 'Entrar' });
         }
     }
 
@@ -60,7 +61,7 @@ export default class Login extends Component {
                     <Form onSubmit={this.handleSubmitForm}>
                         <input type="text" onChange={this.handleChangeUser} value={this.state.user} placeholder="Usuário" />
                         <input type="password" onChange={this.handleChangePass} value={this.state.pass} placeholder="Senha" />
-                        <button type="button" onClick={this.handleSubmitForm}>Entrar</button>
+                        <button type="button" onClick={this.handleSubmitForm}>{ this.state.buttonName }</button>
                         {this.state.message !== '' && (this.state.message)}
                     </Form>
                 </Cart>

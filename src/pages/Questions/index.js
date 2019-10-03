@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { InputTextarea } from 'primereact/inputtextarea';
-// import { Tooltip } from 'primereact/tooltip';
 import { FaArrowRight, FaArrowLeft, FaCheckCircle } from 'react-icons/fa'; 
 import { find } from 'lodash';
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import withReactContent from 'sweetalert2-react-content';
+import { toast } from 'react-toastify';
 
 // Styles
 import { Container, CardPerguntas, CardRespostas } from './styles';
@@ -30,44 +30,13 @@ export default class Questions extends Component {
             //     answerType: 'choices',
             //     answer: ''
             // },
-            // {
-            //     id: 2,
-            //     title: '',
-            //     question: 'Um colega de trabalho está precisando da sua ajuda em uma tarefa. Os seus próprios prazos também estão apertados. Você escolhe ajudar seu colega e levar trabalho para casa.',
-            //     answerType: 'choices',
-            //     answer: ''
-            // },
-            // {
-            //     id: 3,
-            //     title: '',
-            //     question: 'Você tem uma ideia que promete mudar processos e ajudar a empresa de forma geral. O clima está tenso, houveram diversas demissões e todos estão apreensivos. Você esta receoso(a) que sua ideia vá causar má impressão aos gestores. Você prefere então guardar a ideia para um momento mais oportuno. ',
-            //     answerType: 'write',
-            //     answer: ''
-            // },
         ],
         answerOpt: [ // store all options from the backend
-            // {
-            //     id: 1,
-            //     label: 'Discordo totalmente'
-            // },
-            // {
-            //     id: 2,
-            //     label: 'Discordo parcialmente'
-            // },
-            // {
-            //     id: 3,
-            //     label: 'Não concordo, nem discordo'
-            // },
-            // {
-            //     id: 4,
-            //     label: 'Concordo parcialmente'
-            // },
-            // {
-            //     id: 5,
-            //     label: 'Concordo totalmente'
-            // }
+            // { id: 1, label: 'Discordo totalmente' }
         ],
         answers: [], // store the user answers
+        userId: null, // Id do usuário na sessão
+        selectiveProcess: 1, 
         loading: true,
         isAnswer: false,
     }
@@ -75,6 +44,8 @@ export default class Questions extends Component {
     async componentDidMount() {
         const { data: questionsResponse } = await api.get('/question');
         const { data: answersOptResponse } = await api.get('/answerOption');
+
+        const { user } = JSON.parse(localStorage.getItem('compassUser'))
 
         const answers = await questionsResponse.map(question => ({ idQuestion: question.id, answer: null }));
         
@@ -97,7 +68,8 @@ export default class Questions extends Component {
             questions: questionsResponse, 
             question: { ...questionsResponse[startQuestion], index: startQuestion },
             loading: false,
-            isAnswer
+            isAnswer,
+            userId: user.id
         });
     }
 
@@ -154,7 +126,12 @@ export default class Questions extends Component {
             else return data;
         })
 
-        this.setState({ answers });
+        const questions = this.state.questions.map(data => {
+            if(data.id === question.id) return { ...data, answer: answer.id };
+            else return data;
+        })
+
+        this.setState({ answers, questions });
     }
     handleTextAnswer = (e, question) => {
         const answers = this.state.answers.map(data => {
@@ -182,20 +159,34 @@ export default class Questions extends Component {
             MySwal.fire({
                 text: "Você tem certeza de suas respostas?",
                 type: 'question'
-            }).then(data => {
+            }).then(async data => {
                 if(data.value === true) {
-                    console.log("Finish quiz -> ", data);
+                    this.setState({ loading: true });
+                    const respostas = this.state.questions.map(question => {
+                        return { 
+                            COD_RESPOSTA: question.id,
+                            COD_USUARIO_CANDIDATO: this.state.userId,
+                            COD_PRCSS_SELETIVO: this.state.selectiveProcess,
+                            VALOR_MLTPL_ESCOLHA: question.answer
+                        }
+                    })
+
+                    // const teste = await respostas.map(async resposta => await api.post('/answer', resposta));
+
+                    const retorno = await api.post('/answer', respostas);
+
+                    if(retorno.status) {
+                        this.setState({ loading: false });
+                        this.props.history.push('/thank');
+                        toast.success("Logado com sucesso!");
+                    }
+
                 }
             })
         } else {
             MySwal.fire({
                 text: "Você precisa responder todas questões!",
                 type: 'warning'
-            }).then(data => {
-                if(data.value === true) {
-                    console.log("Finish quiz -> ", data);
-                    this.props.history.push(`/thank`);
-                }
             })
         }
     }
@@ -207,11 +198,11 @@ export default class Questions extends Component {
 
         return (
             <Fragment>
+                { loading && (<Loading />) }
                 <Container>
                     { 
                         !isAnswer ? (
                             <CardPerguntas>
-                            { loading && (<Loading />) }
                             {/* {JSON.stringify((!isAnswer && questions))} */}
                                 <div className="pags">
                                     {questions.map((_ask, index) => (
