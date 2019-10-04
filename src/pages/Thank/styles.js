@@ -30,3 +30,13 @@ export const Card = styled.div`
         color: #6f6d6d;
     }
 `
+
+export const Number = styled.div`
+    span {
+        font-size: 100px;
+    }
+    small {
+        font-size: 35px;
+    }
+
+`;
