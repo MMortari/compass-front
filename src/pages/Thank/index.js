@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import CountUp from 'react-countup';
 import { Progress } from 'react-sweet-progress';
+import { Spring } from 'react-spring/renderprops';
 
 // Styles
 import { Container, Card, Number } from './styles';
@@ -11,12 +12,12 @@ const seedrandom = require('seedrandom');
 export default class Thank extends Component {
 
   state = {
-    questions: [6, 9, 6, 6, 2, 6, 7],
+    questions: [6, 9, 6, 6, 2, 8, 7],
     aprovation: 95.536,
     percent: 0,
     loading: true,
     message: ''
-  }
+  } 
 
   async componentDidMount() {
     seedrandom(this.state.questions, { global: true }); 
@@ -24,6 +25,7 @@ export default class Thank extends Component {
     const aprovation = Math.random() * 100;
     console.log("aprovation -> ", aprovation)
 
+    console.time('Time');
     while(this.state.percent < 100) {
       await new Promise(a => {
         setTimeout(() => {
@@ -32,6 +34,7 @@ export default class Thank extends Component {
         }, 90);
       })
     }
+    console.timeEnd('Time');
 
     setTimeout(() => {
       this.setState({ loading: false, aprovation })
@@ -41,12 +44,9 @@ export default class Thank extends Component {
   response = () => {
     let data = "";
     if(this.state.aprovation <= 50) data = "Infelizente você não possui as habilidades necessárias para essa vaga,<br />continue tentando!";
-    if(this.state.aprovation > 50 && this.state.aprovation <= 90) data = "Você tem grande capacidade para essa vaga!";
+    if(this.state.aprovation > 50 && this.state.aprovation <= 90) data = "Você tem grande potecial para essa vaga!";
     if(this.state.aprovation > 90) data = "Você é um de nosso melhores candidatos<br />aguarde nosso contato!";
-    setTimeout(() => {
-      console.log("message")
-      return data;
-    }, 5000)
+    return data;
   }
 
   render() {
@@ -74,7 +74,14 @@ export default class Thank extends Component {
                 <small>%</small>
               </Number>
 
-              <span>{this.response()}</span>
+              <Spring
+                from={{ opacity: 0 }}
+                to={{ opacity: 1 }}
+                config={{ delay: 4800 }}
+                >
+                {props => <span style={props}>{this.response()}</span>}
+              </Spring>
+
 
             </Fragment>
           )}
