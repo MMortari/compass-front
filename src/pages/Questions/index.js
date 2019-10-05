@@ -176,6 +176,9 @@ export default class Questions extends Component {
                     const retorno = await api.post('/answer', respostas);
 
                     if(retorno.status) {
+                        const respostasLocal = respostas.map(data => data.VALOR_MLTPL_ESCOLHA);
+
+                        localStorage.setItem('respostasLocal', JSON.stringify(respostasLocal));
                         this.setState({ loading: false });
                         this.props.history.push('/thank');
                         toast.success("Respostas enviadas com sucesso!");

@@ -12,7 +12,14 @@ const seedrandom = require('seedrandom');
 export default class Thank extends Component {
 
   state = {
-    questions: [6, 9, 6, 6, 2, 8, 7],
+    questions: [
+      Math.floor(Math.random() * 5) + 1, 
+      Math.floor(Math.random() * 5) + 1, 
+      Math.floor(Math.random() * 5) + 1, 
+      Math.floor(Math.random() * 5) + 1, 
+      Math.floor(Math.random() * 5) + 1, 
+      Math.floor(Math.random() * 5) + 1, 
+    ],
     aprovation: 95.536,
     percent: 0,
     loading: true,
@@ -20,21 +27,28 @@ export default class Thank extends Component {
   } 
 
   async componentDidMount() {
+    const respostasLocal = await localStorage.getItem('respostasLocal');
+    // console.log("respostasLocal -> ", respostasLocal)
+    if(respostasLocal) {
+      this.setState({ questions: JSON.parse(respostasLocal) });
+    }
+    // console.log("questions -> ", this.state.questions)
+
     seedrandom(this.state.questions, { global: true }); 
 
     const aprovation = Math.random() * 100;
-    console.log("aprovation -> ", aprovation)
-
+    
     console.time('Time');
     while(this.state.percent < 100) {
       await new Promise(a => {
         setTimeout(() => {
           this.setState({ percent: this.state.percent + Math.floor(Math.random() * 3) })
           a();
-        }, 90);
+        }, 130);
       })
     }
     console.timeEnd('Time');
+    // console.log("aprovation -> ", aprovation)
 
     setTimeout(() => {
       this.setState({ loading: false, aprovation })
@@ -43,9 +57,9 @@ export default class Thank extends Component {
 
   response = () => {
     let data = "";
-    if(this.state.aprovation <= 50) data = "Infelizente você não possui as habilidades necessárias para essa vaga,<br />continue tentando!";
+    if(this.state.aprovation <= 50) data = "Infelizente você não possui as habilidades necessárias para essa vaga, continue tentando em outras vagas!";
     if(this.state.aprovation > 50 && this.state.aprovation <= 90) data = "Você tem grande potecial para essa vaga!";
-    if(this.state.aprovation > 90) data = "Você é um de nosso melhores candidatos<br />aguarde nosso contato!";
+    if(this.state.aprovation > 90) data = "Você é um de nosso melhores candidatos. Aguarde nosso contato!";
     return data;
   }
 
